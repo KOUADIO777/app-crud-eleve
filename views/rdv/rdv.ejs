@@ -1,0 +1,81 @@
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.min.css
+" rel="stylesheet">
+<h1>FORMULAIRE DE PRISE DE RDV</h1>
+<div class="container">
+   
+   <div class="row justify-content-center">
+
+
+    <!-- Vertical -->
+  <form action="/batiment/membre" method="post">
+    <div style="width: 300px;height: 300px;text-align: center;">
+    <div class="form-group  ">
+       <label for="nom">Noms </label>
+       <input type="text" name = "nom" placeholder="nom"class="form-control">
+       <label for="prenoms">Prenoms</label>
+       <input type="text" name="prenoms" placeholder="prenoms"class="form-control" >
+       <label for="motif">Motif</label>
+       <input type="text" name="motif" placeholder="motif"class="form-control">
+       <label for="date">Date</label>
+       <input type="date" name="date" placeholder="date"class="form-control">
+       <label for="heure">Heure</label>
+       <input type="time" name="heure" placeholder="heure"class="form-control">
+       
+       <label for="username">username</label>
+       <input type="text" name="username" placeholder="username"class="form-control">
+       <div class="px-5 mb-4">
+        <button type="submit" class="btn btn-success"><b><i class="ti-harddrives"></i> Confimer le rendez-vous</b></button>
+     </div>
+    </div>
+ 
+ </form>
+ <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js
+    "></script>
+    <script type="text/javascript">
+    
+      const form = document.getElementById('form')
+    
+      form.addEventListener('submit', (e)=> {
+        e.preventDefault()
+        const formData = new FormData(form)
+    
+        const data = {
+            nom: formData.get('nom'), 
+            prenoms: formData.get('prenoms'), 
+            motif: formData.get('motif'), 
+            date: formData.get('date'),
+            heure: formData.get('heure'),
+            nom_Serviteur:formData.get('nom_Serviteur'),
+            username: formData.get('username')
+        }
+    
+        fetch('/rdv/rdv', {
+            method: 'POST',
+            headers: {
+                'Content-Type': "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then((result)=>result.json())
+            .then((data) =>{
+                console.log(data)
+                Swal.fire({
+                    title: "Félicitations!",
+                    text: data.message,
+                    icon: "success"
+                  }).then(response =>{
+                    /* Read more about isConfirmed, isDenied below */
+                    if (response.isConfirmed) {
+                      window.location.href = "/rdv"
+                    }
+    
+                  })
+            })
+            .catch(error=>{
+                console.error(error)
+            })
+      })
+    
+</script>

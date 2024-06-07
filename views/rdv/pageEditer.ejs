@@ -1,0 +1,17 @@
+<form action="/batiment/membre/update/<%= userRdv._id %>" method="POST">
+    <div class="form-group">
+    <label for="nom">Nom </label>
+        <input type="text" name="nom" placeholder="nom"class="form-control" value="<%= userRdv.nom %>">
+    <label for="prenoms">prenoms</label>
+    <input type="text" name="prenoms" placeholder="prenoms"class="form-control" value="<%= userRdv.prenoms %>">
+    <label for="motif">motif</label>
+    <input type="text" name="motif" placeholder="motif"class="form-control" value="<%= userRdv.motif %>">
+    <label for="date">date</label>
+    <input type="date" name="date" placeholder="date"class="form-control" value="<%= userRdv.date %>" >
+    <label for="heure">heure</label>
+    <input type="time" name="heure" placeholder="heure"class="form-control" value="<%= userRdv.heure %>">
+    
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username"class="form-control" value="<%=  userRdv.username %>">
+    <input type="submit" value="Modifier">
+    </form>
